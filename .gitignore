@@ -1,3 +1,7 @@
 /AbstractBuilding.class
 /AbstractElevator.class
 /AbstractEventBarrier.class
+/EventBarrier.class
+/TestEventBarrier$Consumer.class
+/TestEventBarrier$Producer.class
+/TestEventBarrier.class
