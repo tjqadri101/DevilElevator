@@ -5,7 +5,7 @@ public class TestEventBarrier  {
 		public Producer(){	
 		}
 		public void run(){
-			while(true){
+			for(int j=1;j<2;j++){
 				
 				barrier.raise();
 				
@@ -16,7 +16,7 @@ public class TestEventBarrier  {
 		public Consumer(){
 		}
 		public void run(){
-			while(true){
+			for(int j=1;j<2;j++){
 				barrier.arrive();
 				int s=0;
 				for(int i=1;i<3000000;i++){

@@ -16,7 +16,7 @@ public abstract class AbstractElevator {
 	}
 
 	/**
-	 * Elevator control inferface: invoked by Elevator thread.
+	 * Elevator control interface: invoked by Elevator thread.
  	 */
 
 	/* Signal incoming and outgoing riders */

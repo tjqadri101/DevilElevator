@@ -1,7 +1,7 @@
 
 public class EventBarrier extends AbstractEventBarrier {
 	private int numWaiters;
-	private int event; 
+	private boolean event; 
 	
 	public EventBarrier() {
 	}
@@ -12,7 +12,7 @@ public class EventBarrier extends AbstractEventBarrier {
 	public synchronized void arrive(){
 		numWaiters++;
 		System.out.println("waiting for barrier");
-		while (event==0)
+		while (!event)
 		{
 			try {
 				wait();
@@ -30,7 +30,7 @@ public class EventBarrier extends AbstractEventBarrier {
  	 * before raise() returns.
  	 */	
 	public synchronized void raise(){
-		event=1;
+		event=true;
 		System.out.println("barrier up");
 		notifyAll();
 		while(numWaiters>0){
@@ -41,7 +41,7 @@ public class EventBarrier extends AbstractEventBarrier {
 				e.printStackTrace();
 			}
 		}	
-		event=0;
+		event=false;
 		System.out.println("barrier down");
 	}
 	
