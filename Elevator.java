@@ -42,8 +42,9 @@ public class Elevator extends AbstractElevator implements Runnable{
 	public synchronized void ClosedDoors(){
 		assert openDoors;
 		//System.out.println("got here some how");
+		
 		//while(((currentDirection==2) && (FloorRequestsInUp[currentFloor])>0))||(FloorRequestsOut[currentFloor]>0)&&(occupancy<maxOccupancyThreshold)){
-		while((occupancy<maxOccupancyThreshold)&&((FloorRequestsOut[currentFloor]>0)||(((currentDirection==2)&&(FloorRequestsInUp[currentFloor]>0))||((currentDirection==1)&&(FloorRequestsInDown[currentFloor]>0))))){
+		while((FloorRequestsOut[currentFloor]>0)||(((currentDirection==2)&&(FloorRequestsInUp[currentFloor]>0))||((currentDirection==1)&&(FloorRequestsInDown[currentFloor]>0)))){
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -83,8 +84,10 @@ public class Elevator extends AbstractElevator implements Runnable{
 		}
 		//System.out.println("say something");
 		if (occupancy==maxOccupancyThreshold){
-			notifyAll();
+			if(direction==1) FloorRequestsInDown[currentFloor]=0;
+			if(direction==2) FloorRequestsInUp[currentFloor]=0;
 			System.out.println("R"+rider+" tries to get into E"+elevatorId+"but it is full" );
+			notifyAll();
 			return false;
 		}
 		System.out.println("R"+rider+" enters E"+elevatorId+" on F"+floor);

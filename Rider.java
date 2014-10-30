@@ -41,7 +41,7 @@ public class Rider implements Runnable {
 				else if(startingFloor>destinationFloor){
 					Elevator e = myBuilding.CallDown(startingFloor, myRiderId);
 					while(!e.Enter(rider,startingFloor,1)){
-						e = myBuilding.CallUp(startingFloor, myRiderId);
+						e = myBuilding.CallDown(startingFloor, myRiderId);
 					}
 					e.RequestFloor(destinationFloor,rider);
 					e.Exit(rider,destinationFloor);
