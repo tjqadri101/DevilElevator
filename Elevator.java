@@ -1,13 +1,14 @@
 
-public class Elevator extends AbstractElevator{
+public class Elevator extends AbstractElevator implements Runnable{
 
-	private int currentDirection; //0 idle, 1 down, 2 up
+	public int currentDirection; //0 idle, 1 down, 2 up
 	private boolean openDoors;
 	//private int numPeopleIn;
 	//private int numPeopleOut;
 	private int occupancy;
-	private int[] FloorRequestsIn = new int[numFloors];
-	private int[] FloorRequestsOut = new int[numFloors];
+	private int[] FloorRequestsIn = new int[numFloors+1]; //no floor at index 0
+	private int[] FloorRequestsOut = new int[numFloors+1];//no floor at index 0
+	private int totalRequests;
 	private int currentFloor;
 	/**
 	 * Other variables/data structures as needed goes here 
@@ -15,15 +16,18 @@ public class Elevator extends AbstractElevator{
 
 	public Elevator(int numFloors, int elevatorId, int maxOccupancyThreshold) {
 		super(numFloors, elevatorId, maxOccupancyThreshold);
+		//Initialize the elevator to start at the first floor
+		VisitFloor(1);
+		currentDirection = 0; //initialize the elevator to be initially idle
 	}
 
 	@Override
 	/**
 	 * Elevator control interface: invoked by Elevator thread.
- 	 */
+	 */
 
 	/* Signal incoming and outgoing riders */
-	public void OpenDoors(){
+	public synchronized void OpenDoors(){
 		openDoors = true;
 		notifyAll();
 	}
@@ -32,7 +36,7 @@ public class Elevator extends AbstractElevator{
 	/**
 	 * When capacity is reached or the outgoing riders are exited and
 	 * incoming riders are in. 
- 	 */
+	 */
 	public synchronized void ClosedDoors(){
 		assert openDoors;
 		while((FloorRequestsIn[currentFloor]+FloorRequestsOut[currentFloor]>0)&&(occupancy<maxOccupancyThreshold)){
@@ -56,7 +60,7 @@ public class Elevator extends AbstractElevator{
 	@Override
 	/**
 	 * Elevator rider interface (part 1): invoked by rider threads. 
-  	 */
+	 */
 
 	/* Enter the elevator */
 	public synchronized boolean Enter(){
@@ -73,11 +77,12 @@ public class Elevator extends AbstractElevator{
 			return false;
 		}
 		FloorRequestsIn[currentFloor]--;
+		totalRequests--;
 		if(FloorRequestsIn[currentFloor]==0) notifyAll();
 		occupancy++;
 		return true;
 	}
-	
+
 	@Override
 	/* Exit the elevator */
 	public synchronized void Exit(){
@@ -91,19 +96,72 @@ public class Elevator extends AbstractElevator{
 			}
 		}
 		FloorRequestsOut[currentFloor]--;
+		totalRequests--;
 		if(FloorRequestsOut[currentFloor]==0) notifyAll();
 		occupancy--;
 	}
 
 	@Override
 	/* Request a destination floor once you enter */
- 	public void RequestFloor(int floor){
- 		FloorRequestsOut[floor]++;
- 	}
-	
+	public void RequestFloor(int floor){
+		FloorRequestsOut[floor]++;
+		totalRequests++;
+	}
+
+	private boolean isIdle(){
+		return totalRequests == 0;
+	}
+
+	/* Request a source floor while calling elevator */
+	public void RequestFloorIn(int floor){
+		FloorRequestsIn[floor]++;
+		totalRequests++;
+	}
+
 	/* Other methods as needed goes here */
 	public int getCurrentFloor(){
 		return currentFloor;
 	}
+
+	@Override
+	//we do a circular scan
+	public void run() {
+		while(true){
+			if(!isIdle()){
+				if(currentDirection == 1){//going down
+					for(int i = currentFloor; i > 0; i--){
+						VisitFloor(i);
+						if(FloorRequestsIn[i]+FloorRequestsOut[i]>0){
+							OpenDoors();
+							ClosedDoors();
+						}	
+						if(isIdle()){
+							currentDirection = 0;
+							break;
+						}
+						if(i == 1){
+							currentDirection = 2; //make the elevator travel up
+						}
+					}
+				}
+				else if(currentDirection == 2){//going up
+					for(int i = currentFloor; i <= numFloors; i++){
+						VisitFloor(i);
+						if(FloorRequestsIn[i]+FloorRequestsOut[i]>0){
+							OpenDoors();
+							ClosedDoors();
+						}	
+						if(isIdle()){
+							currentDirection = 0;
+							break;
+						}
+						if(i == numFloors){
+							currentDirection = 1; //make the elevator travel up
+						}
+					}
+				}
+			}
+		}
+	}	
 }
 
