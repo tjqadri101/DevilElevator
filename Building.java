@@ -64,12 +64,14 @@ public class Building extends AbstractBuilding{
 		}
 		myElevators[index].RequestFloorIn(fromFloor,true);
 		if(myElevators[index].currentDirection == 0){
+			System.out.println("debugging");
 			if(directionForIdle){
 				myElevators[index].currentDirection = 2;
 			}
 			else{
 				myElevators[index].currentDirection = 1;
 			}
+			System.out.println(myElevators[index].totalRequests);
 		}
 		return myElevators[index];
 	}
@@ -133,12 +135,14 @@ public class Building extends AbstractBuilding{
 		}
 		myElevators[index].RequestFloorIn(fromFloor,false);
 		if(myElevators[index].currentDirection == 0){
+			System.out.println("debugging");
 			if(directionForIdle){
 				myElevators[index].currentDirection = 2;
 			}
 			else{
 				myElevators[index].currentDirection = 1;
 			}
+			System.out.println(myElevators[index].totalRequests);
 		}
 		return myElevators[index];
 	}

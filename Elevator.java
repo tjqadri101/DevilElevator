@@ -9,7 +9,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 	private int[] FloorRequestsInUp = new int[numFloors+1]; //no floor at index 0
 	private int[] FloorRequestsInDown = new int[numFloors+1];
 	private int[] FloorRequestsOut = new int[numFloors+1];//no floor at index 0
-	private int totalRequests;
+	public int totalRequests;
 	private int currentFloor;
 	/**
 	 * Other variables/data structures as needed goes here 
@@ -140,7 +140,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 	}
 
 	/* Request a source floor while calling elevator */
-	public void RequestFloorIn(int floor,boolean direction){
+	public synchronized void RequestFloorIn(int floor,boolean direction){
 		if(direction)
 			FloorRequestsInUp[floor]++;
 		else
@@ -158,7 +158,9 @@ public class Elevator extends AbstractElevator implements Runnable{
 	public void run() {
 		while(true){
 			if(!makeIdle()){
+				System.out.println("wtf");
 				if(currentDirection == 1){//going down
+					System.out.println("error");
 					for(int i = currentFloor - 1; i > 0; i--){
 						VisitFloor(i);
 						if(FloorRequestsInDown[i]+FloorRequestsOut[i]>0){
@@ -176,6 +178,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 					}
 				}
 				else if(currentDirection == 2){//going up
+					System.out.println("error");
 					for(int i = currentFloor + 1; i <= numFloors; i++){
 						VisitFloor(i);
 						if(FloorRequestsInUp[i]+FloorRequestsOut[i]>0){
