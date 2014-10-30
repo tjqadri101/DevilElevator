@@ -28,18 +28,19 @@ public class Rider implements Runnable {
 			if (rider == riderId){
 				if(startingFloor<destinationFloor){
 					Elevator e = building.CallUp(startingFloor);
-					e.Enter();
-					e.RequestFloor(destinationFloor);
-					e.Exit();
+					e.Enter(rider,startingFloor,2); //need to change this, put parameters floor and direction
+					e.RequestFloor(destinationFloor,rider);
+					e.Exit(rider,destinationFloor); //put parameters
 				}
 				if(startingFloor>destinationFloor){
 					Elevator e = building.CallDown(startingFloor);
-					e.Enter();
-					e.RequestFloor(destinationFloor);
-					e.Exit();
+					e.Enter(rider,startingFloor,1);
+					e.RequestFloor(destinationFloor,rider);
+					e.Exit(rider,destinationFloor);
 				}
 			}
 		}
+		s.close();
 		
 	}
 

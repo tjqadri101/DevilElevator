@@ -29,6 +29,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 	/* Signal incoming and outgoing riders */
 	public synchronized void OpenDoors(){
 		openDoors = true;
+		System.out.println("E"+elevatorId+" on F"+currentFloor+" opens");
 		notifyAll();
 	}
 
@@ -48,11 +49,14 @@ public class Elevator extends AbstractElevator implements Runnable{
 			}
 		}
 		openDoors = false;
+		System.out.println("E"+elevatorId+"on F"+currentFloor+"closes");
 	}
 
 	@Override
 	/* Go to a requested floor */
 	public synchronized void VisitFloor(int floor){
+		if (currentDirection==1) System.out.println("E"+elevatorId+" moves down to F"+floor);
+		else System.out.println("E"+elevatorId+"moves up to F"+floor);
 		currentFloor = floor;
 	}
 
@@ -63,8 +67,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 	 */
 
 	/* Enter the elevator */
-	public synchronized boolean Enter(){
-		while((FloorRequestsOut[currentFloor]>0)||(!openDoors)){ //add something to make sure the elevator is on the right floor
+	public synchronized boolean Enter(int rider,int floor, int direction){
+		while((FloorRequestsOut[currentFloor]>0)||(!openDoors)||(floor!=currentFloor)||(direction!=currentDirection)){ //add something to make sure the elevator is on the right floor
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -74,8 +78,10 @@ public class Elevator extends AbstractElevator implements Runnable{
 		}
 		if (occupancy==maxOccupancyThreshold){
 			notifyAll();
+			System.out.println("R"+rider+" tries to get into E"+elevatorId+"but it is full" );
 			return false;
 		}
+		System.out.println("R"+rider+" enters E"+elevatorId+" on F"+floor);
 		FloorRequestsIn[currentFloor]--;
 		totalRequests--;
 		if(FloorRequestsIn[currentFloor]==0) notifyAll();
@@ -85,9 +91,9 @@ public class Elevator extends AbstractElevator implements Runnable{
 
 	@Override
 	/* Exit the elevator */
-	public synchronized void Exit(){
+	public synchronized void Exit(int rider,int floor){
 		//maybe check if it is on the right floor
-		while(!openDoors){
+		while((!openDoors)||(floor!=currentFloor)){
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -95,6 +101,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 				e.printStackTrace();
 			}
 		}
+		System.out.println("R"+rider+" exits E"+elevatorId+" on F"+floor);
 		FloorRequestsOut[currentFloor]--;
 		totalRequests--;
 		if(FloorRequestsOut[currentFloor]==0) notifyAll();
@@ -103,7 +110,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 
 	@Override
 	/* Request a destination floor once you enter */
-	public void RequestFloor(int floor){
+	public synchronized void RequestFloor(int floor, int rider){
+		System.out.println("R"+rider+" pushes E"+elevatorId+"B"+floor);
 		FloorRequestsOut[floor]++;
 		totalRequests++;
 	}
