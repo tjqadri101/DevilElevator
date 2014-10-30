@@ -44,7 +44,9 @@ public class Elevator extends AbstractElevator implements Runnable{
 		//System.out.println("got here some how");
 		
 		//while(((currentDirection==2) && (FloorRequestsInUp[currentFloor])>0))||(FloorRequestsOut[currentFloor]>0)&&(occupancy<maxOccupancyThreshold)){
-		while((FloorRequestsOut[currentFloor]>0)||(((currentDirection==2)&&(FloorRequestsInUp[currentFloor]>0))||((currentDirection==1)&&(FloorRequestsInDown[currentFloor]>0)))){
+		while((FloorRequestsOut[currentFloor]>0) 
+				|| (((currentDirection==2) && (FloorRequestsInUp[currentFloor]>0)) 
+				||((currentDirection==1) && (FloorRequestsInDown[currentFloor]>0)))){
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -74,7 +76,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 	/* Enter the elevator */
 	public synchronized boolean Enter(int rider,int floor, int direction){
 		//System.out.println("it should start waiting "+totalRequests);
-		while((FloorRequestsOut[currentFloor]>0)||(!openDoors)||(floor!=currentFloor)||(direction!=currentDirection)){ //add something to make sure the elevator is on the right floor
+		while((FloorRequestsOut[currentFloor]>0) || (!openDoors) || 
+				(floor!=currentFloor) || (direction!=currentDirection)){ //add something to make sure the elevator is on the right floor
 			try {
 				wait();
 			} catch (InterruptedException e) {
