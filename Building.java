@@ -61,7 +61,7 @@ public class Building extends AbstractBuilding{
 				}
 			}
 		}
-		myElevators[index].RequestFloorIn(fromFloor);
+		myElevators[index].RequestFloorIn(fromFloor,true);
 		if(myElevators[index].currentDirection == 0){
 			if(directionForIdle){
 				myElevators[index].currentDirection = 2;
@@ -129,7 +129,7 @@ public class Building extends AbstractBuilding{
 				}
 			}
 		}
-		myElevators[index].RequestFloorIn(fromFloor);
+		myElevators[index].RequestFloorIn(fromFloor,false);
 		if(myElevators[index].currentDirection == 0){
 			if(directionForIdle){
 				myElevators[index].currentDirection = 2;

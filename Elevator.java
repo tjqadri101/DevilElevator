@@ -6,7 +6,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 	//private int numPeopleIn;
 	//private int numPeopleOut;
 	private int occupancy;
-	private int[] FloorRequestsIn = new int[numFloors+1]; //no floor at index 0
+	private int[] FloorRequestsInUp = new int[numFloors+1]; //no floor at index 0
+	private int[] FloorRequestsInDown = new int[numFloors+1];
 	private int[] FloorRequestsOut = new int[numFloors+1];//no floor at index 0
 	private int totalRequests;
 	private int currentFloor;
@@ -40,7 +41,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 	 */
 	public synchronized void ClosedDoors(){
 		assert openDoors;
-		while((FloorRequestsIn[currentFloor]+FloorRequestsOut[currentFloor]>0)&&(occupancy<maxOccupancyThreshold)){
+		//while(((currentDirection==2) && (FloorRequestsInUp[currentFloor])>0))||(FloorRequestsOut[currentFloor]>0)&&(occupancy<maxOccupancyThreshold)){
+		while((occupancy<maxOccupancyThreshold)&&((FloorRequestsOut[currentFloor]>0)||(((currentDirection==2)&&(FloorRequestsInUp[currentFloor]>0))||((currentDirection==1)&&(FloorRequestsInDown[currentFloor]>0))))){
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -82,10 +84,18 @@ public class Elevator extends AbstractElevator implements Runnable{
 			return false;
 		}
 		System.out.println("R"+rider+" enters E"+elevatorId+" on F"+floor);
-		FloorRequestsIn[currentFloor]--;
-		totalRequests--;
-		if(FloorRequestsIn[currentFloor]==0) notifyAll();
-		occupancy++;
+		if(direction==1){
+			FloorRequestsInDown[currentFloor]--;
+			totalRequests--;
+			if(FloorRequestsInDown[currentFloor]==0) notifyAll();
+			occupancy++;
+		}
+		else{
+			FloorRequestsInUp[currentFloor]--;
+			totalRequests--;
+			if(FloorRequestsInUp[currentFloor]==0) notifyAll();
+			occupancy++;
+		}
 		return true;
 	}
 
@@ -121,8 +131,11 @@ public class Elevator extends AbstractElevator implements Runnable{
 	}
 
 	/* Request a source floor while calling elevator */
-	public void RequestFloorIn(int floor){
-		FloorRequestsIn[floor]++;
+	public void RequestFloorIn(int floor,boolean direction){
+		if(direction)
+			FloorRequestsInUp[floor]++;
+		else
+			FloorRequestsInDown[floor]++;
 		totalRequests++;
 	}
 
@@ -139,7 +152,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 				if(currentDirection == 1){//going down
 					for(int i = currentFloor; i > 0; i--){
 						VisitFloor(i);
-						if(FloorRequestsIn[i]+FloorRequestsOut[i]>0){
+						if(FloorRequestsInDown[i]+FloorRequestsOut[i]>0){
 							OpenDoors();
 							ClosedDoors();
 						}	
@@ -155,7 +168,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 				else if(currentDirection == 2){//going up
 					for(int i = currentFloor; i <= numFloors; i++){
 						VisitFloor(i);
-						if(FloorRequestsIn[i]+FloorRequestsOut[i]>0){
+						if(FloorRequestsInUp[i]+FloorRequestsOut[i]>0){
 							OpenDoors();
 							ClosedDoors();
 						}	
