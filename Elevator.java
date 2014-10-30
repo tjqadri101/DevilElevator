@@ -1,9 +1,7 @@
 
-public class Elevator {
+public class Elevator extends AbstractElevator{
 
-	protected int numFloors; 
-	protected int elevatorId;
-	protected int maxOccupancyThreshold;
+	
 	private boolean openDoors;
 	//private int numPeopleIn;
 	//private int numPeopleOut;
@@ -16,9 +14,7 @@ public class Elevator {
 	 */
 
 	public Elevator(int numFloors, int elevatorId, int maxOccupancyThreshold) {
-		this.numFloors = numFloors;
-		this.elevatorId = elevatorId;
-		this.maxOccupancyThreshold = maxOccupancyThreshold;
+		super(numFloors, elevatorId, maxOccupancyThreshold);
 	}
 
 	/**
