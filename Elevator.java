@@ -58,7 +58,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 	/* Go to a requested floor */
 	public synchronized void VisitFloor(int floor){
 		if (currentDirection==1) System.out.println("E"+elevatorId+" moves down to F"+floor);
-		else System.out.println("E"+elevatorId+" moves up to F"+floor);
+		else if(currentDirection == 2) System.out.println("E"+elevatorId+" moves up to F"+floor);
+		else	System.out.println("E" + elevatorId + " is idle on F" +  floor + ".");
 		currentFloor = floor;
 	}
 
@@ -122,12 +123,20 @@ public class Elevator extends AbstractElevator implements Runnable{
 	/* Request a destination floor once you enter */
 	public synchronized void RequestFloor(int floor, int rider){
 		System.out.println("R"+rider+" pushes E"+elevatorId+"B"+floor);
+		if(currentDirection == 0){
+			if(currentFloor < floor){
+				currentDirection = 2;
+			}
+			else{
+				currentDirection = 1;
+			}
+		}
 		FloorRequestsOut[floor]++;
 		totalRequests++;
 	}
 
-	private boolean isIdle(){
-		return totalRequests == 0;
+	private boolean makeIdle(){
+		return (totalRequests == 0);
 	}
 
 	/* Request a source floor while calling elevator */
@@ -148,16 +157,17 @@ public class Elevator extends AbstractElevator implements Runnable{
 	//we do a circular scan
 	public void run() {
 		while(true){
-			if(!isIdle()){
+			if(!makeIdle()){
 				if(currentDirection == 1){//going down
-					for(int i = currentFloor -1; i > 0; i--){
+					for(int i = currentFloor - 1; i > 0; i--){
 						VisitFloor(i);
 						if(FloorRequestsInDown[i]+FloorRequestsOut[i]>0){
 							OpenDoors();
 							ClosedDoors();
 						}	
-						if(isIdle()){
+						if(makeIdle()){
 							currentDirection = 0;
+							System.out.println("Entering idle.");
 							break;
 						}
 						if(i == 1){
@@ -166,14 +176,15 @@ public class Elevator extends AbstractElevator implements Runnable{
 					}
 				}
 				else if(currentDirection == 2){//going up
-					for(int i = currentFloor+1; i <= numFloors; i++){
+					for(int i = currentFloor + 1; i <= numFloors; i++){
 						VisitFloor(i);
 						if(FloorRequestsInUp[i]+FloorRequestsOut[i]>0){
 							OpenDoors();
 							ClosedDoors();
 						}	
-						if(isIdle()){
+						if(makeIdle()){
 							currentDirection = 0;
+							System.out.println("Entering idle.");
 							break;
 						}
 						if(i == numFloors){
@@ -181,9 +192,6 @@ public class Elevator extends AbstractElevator implements Runnable{
 						}
 					}
 				}
-			}
-			else{
-				System.out.println("Elevator is idle");
 			}
 		}
 	}	

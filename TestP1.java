@@ -53,6 +53,6 @@ public class TestP1 {
 		}
 		
 		public static void main(String args[]){
-			runTest("in.txt");
+			runTest("inP1.txt");
 		}
 }
