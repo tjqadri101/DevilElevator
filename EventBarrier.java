@@ -5,6 +5,8 @@ public class EventBarrier extends AbstractEventBarrier {
 	
 	public EventBarrier() {
 	}
+	
+	@Override
 	/**
 	 * Arrive at the barrier and wait until an event is signaled. Return
  	 * immediately if already in the signaled state.
@@ -24,6 +26,7 @@ public class EventBarrier extends AbstractEventBarrier {
 		System.out.println("started doing work");
 	}	
 
+	@Override
 	/**
 	 * Signal the event and block until all threads that wait for this
  	 * event have responded. The EventBarrier returns to an unsignaled state
@@ -45,7 +48,7 @@ public class EventBarrier extends AbstractEventBarrier {
 		System.out.println("barrier down");
 	}
 	
-	
+	@Override
 	/**
 	 * Indicate that the calling thread has finished responding to a
  	 * signaled event, and block until all other threads that wait for 
@@ -68,6 +71,7 @@ public class EventBarrier extends AbstractEventBarrier {
 		System.out.println("all jobs completed");
 	}
 
+	@Override
 	/**
 	 * Return a count of threads that are waiting for the event or that
  	 * have not responded yet.

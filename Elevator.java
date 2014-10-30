@@ -17,16 +17,18 @@ public class Elevator extends AbstractElevator{
 		super(numFloors, elevatorId, maxOccupancyThreshold);
 	}
 
+	@Override
 	/**
 	 * Elevator control interface: invoked by Elevator thread.
  	 */
 
 	/* Signal incoming and outgoing riders */
-	public synchronized void OpenDoors(){
+	public void OpenDoors(){
 		openDoors=true;
 		notifyAll();
 	}
 
+	@Override
 	/**
 	 * When capacity is reached or the outgoing riders are exited and
 	 * incoming riders are in. 
@@ -44,12 +46,14 @@ public class Elevator extends AbstractElevator{
 		openDoors=false;
 	}
 
+	@Override
 	/* Go to a requested floor */
 	public synchronized void VisitFloor(int floor){
 		currentFloor=floor;
 	}
 
 
+	@Override
 	/**
 	 * Elevator rider interface (part 1): invoked by rider threads. 
   	 */
@@ -74,6 +78,7 @@ public class Elevator extends AbstractElevator{
 		return true;
 	}
 	
+	@Override
 	/* Exit the elevator */
 	public synchronized void Exit(){
 		//maybe check if it is on the right floor
@@ -90,8 +95,9 @@ public class Elevator extends AbstractElevator{
 		occupancy--;
 	}
 
+	@Override
 	/* Request a destination floor once you enter */
- 	public synchronized void RequestFloor(int floor){
+ 	public void RequestFloor(int floor){
  		FloorRequestsOut[floor]++;
  	}
 	
