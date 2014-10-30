@@ -14,7 +14,7 @@ public class Building extends AbstractBuilding{
 		boolean directionForIdle = false; //false go down, true go up
 		int min = Integer.MAX_VALUE;
 		int index = 0;
-		System.out.printf("R%d pushes U%d.\n", riderId, fromFloor);
+		
 		for(int i = 0; i < numElevators; i++){
 			if(myElevators[i].currentDirection == 0){//currently idle
 				if(myElevators[i].getCurrentFloor() <= fromFloor){
@@ -62,17 +62,20 @@ public class Building extends AbstractBuilding{
 				}
 			}
 		}
+		System.out.printf("R%d pushes U%d.\n", riderId, fromFloor);
 		myElevators[index].RequestFloorIn(fromFloor,true);
 		if(myElevators[index].currentDirection == 0){
-			System.out.println("debugging");
+			//System.out.println("debugging");
 			if(directionForIdle){
 				myElevators[index].currentDirection = 2;
 			}
 			else{
 				myElevators[index].currentDirection = 1;
 			}
-			System.out.println(myElevators[index].totalRequests);
+			//System.out.println("no of requests"+ myElevators[index].totalRequests);
+			//System.out.println("direction"+myElevators[index].currentDirection);
 		}
+		
 		return myElevators[index];
 	}
 
@@ -83,7 +86,7 @@ public class Building extends AbstractBuilding{
 		boolean directionForIdle = false; //false go down, true go up
 		int min = Integer.MAX_VALUE;
 		int index = 0;
-		System.out.printf("R%d pushes D%d.\n", riderId, fromFloor);
+		
 		for(int i = 0; i < numElevators; i++){
 			if(myElevators[i].currentDirection == 0){//currently idle
 				if(myElevators[i].getCurrentFloor() >= fromFloor){
@@ -133,17 +136,20 @@ public class Building extends AbstractBuilding{
 				}
 			}
 		}
+		System.out.printf("R%d pushes D%d.\n", riderId, fromFloor);
 		myElevators[index].RequestFloorIn(fromFloor,false);
 		if(myElevators[index].currentDirection == 0){
-			System.out.println("debugging");
+			//System.out.println("debugging");
 			if(directionForIdle){
 				myElevators[index].currentDirection = 2;
 			}
 			else{
 				myElevators[index].currentDirection = 1;
 			}
-			System.out.println(myElevators[index].totalRequests);
+			//System.out.println("no of requests"+ myElevators[index].totalRequests);
+			//System.out.println("direction"+myElevators[index].currentDirection);
 		}
+		
 		return myElevators[index];
 	}
 

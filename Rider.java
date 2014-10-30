@@ -33,9 +33,10 @@ public class Rider implements Runnable {
 					Elevator e = myBuilding.CallUp(startingFloor, myRiderId);
 					while(!e.Enter(rider,startingFloor,2)){
 						e = myBuilding.CallUp(startingFloor, myRiderId);
-					}; //need to change this, put parameters floor and direction
+					} //need to change this, put parameters floor and direction
 					e.RequestFloor(destinationFloor,rider);
 					e.Exit(rider,destinationFloor); //put parameters
+					//System.out.println("gets here through some fucking miracle");
 				}
 				else if(startingFloor>destinationFloor){
 					Elevator e = myBuilding.CallDown(startingFloor, myRiderId);
@@ -44,6 +45,7 @@ public class Rider implements Runnable {
 					}
 					e.RequestFloor(destinationFloor,rider);
 					e.Exit(rider,destinationFloor);
+					//System.out.println("gets here through some fucking miracle");
 				}
 			}
 		}
