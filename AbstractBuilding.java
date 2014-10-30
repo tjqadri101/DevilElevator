@@ -24,7 +24,7 @@ public abstract class AbstractBuilding {
      * @param fromFloor  floor from which elevator is called
      * @return           instance of the elevator to use to go up
      */
-	public abstract AbstractElevator CallUp(int fromFloor);
+	public abstract AbstractElevator CallUp(int fromFloor, int riderId);
 
     /**
      * Signal an elevator that we want to go down
@@ -32,7 +32,7 @@ public abstract class AbstractBuilding {
      * @param fromFloor  floor from which elevator is called
      * @return           instance of the elevator to use to go down
      */
-	public abstract AbstractElevator CallDown(int fromFloor); 
+	public abstract AbstractElevator CallDown(int fromFloor, int riderId); 
     
 	/* Other methods as needed goes here */
 }

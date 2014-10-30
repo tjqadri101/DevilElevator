@@ -9,11 +9,12 @@ public class Building extends AbstractBuilding{
 
 	@Override
 	//We do a circular scan
-	public Elevator CallUp(int fromFloor) {
+	public Elevator CallUp(int fromFloor, int riderId){
 		int distance;
 		boolean directionForIdle = false; //false go down, true go up
 		int min = Integer.MAX_VALUE;
 		int index = 0;
+		System.out.printf("R%d pushes U%d.\n", riderId, fromFloor);
 		for(int i = 0; i < numElevators; i++){
 			if(myElevators[i].currentDirection == 0){//currently idle
 				if(myElevators[i].getCurrentFloor() <= fromFloor){
@@ -75,11 +76,12 @@ public class Building extends AbstractBuilding{
 
 	@Override
 	//We do a circular scan
-	public Elevator CallDown(int fromFloor) {
+	public Elevator CallDown(int fromFloor, int riderId){
 		int distance;
 		boolean directionForIdle = false; //false go down, true go up
 		int min = Integer.MAX_VALUE;
 		int index = 0;
+		System.out.printf("R%d pushes D%d.\n", riderId, fromFloor);
 		for(int i = 0; i < numElevators; i++){
 			if(myElevators[i].currentDirection == 0){//currently idle
 				if(myElevators[i].getCurrentFloor() >= fromFloor){

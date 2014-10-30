@@ -21,7 +21,7 @@ public class Rider implements Runnable {
 	public void run() {
 		int iter = 0;
 		while(iter < 4){//move past the first line which contains four tokens
-			myScanner.hasNextInt();
+			myScanner.nextInt();
 			iter++;
 		}
 		while(myScanner.hasNextInt()){
@@ -30,13 +30,13 @@ public class Rider implements Runnable {
 			int destinationFloor = myScanner.nextInt();
 			if (rider == myRiderId){
 				if(startingFloor<destinationFloor){
-					Elevator e = myBuilding.CallUp(startingFloor);
+					Elevator e = myBuilding.CallUp(startingFloor, myRiderId);
 					e.Enter(rider,startingFloor,2); //need to change this, put parameters floor and direction
 					e.RequestFloor(destinationFloor,rider);
 					e.Exit(rider,destinationFloor); //put parameters
 				}
 				else if(startingFloor>destinationFloor){
-					Elevator e = myBuilding.CallDown(startingFloor);
+					Elevator e = myBuilding.CallDown(startingFloor, myRiderId);
 					e.Enter(rider,startingFloor,1);
 					e.RequestFloor(destinationFloor,rider);
 					e.Exit(rider,destinationFloor);
