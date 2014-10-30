@@ -4,7 +4,7 @@ import java.util.*;
 
 public class TestP1 {
 		public static void runTest(String inputFilePath){
-			int numFloors, numElevators, numRiders, maxOccupancy;
+			int numFloors = 0, numElevators = 0, numRiders = 0, maxOccupancy = 0;
 			File input = new File(inputFilePath);
 			try {
 				Scanner mainScanner = new Scanner(input);
@@ -17,7 +17,10 @@ public class TestP1 {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
+			System.out.printf("F: %d, E: %d, R: %d, N: %d \n", numFloors, numElevators, numRiders, maxOccupancy);
+		}
+		
+		public static void main(String args[]){
+			runTest("in.txt");
 		}
 }
