@@ -1,7 +1,7 @@
 
 public class Elevator extends AbstractElevator{
 
-	
+	private int currentDirection; //0 idle, 1 down, 2 up
 	private boolean openDoors;
 	//private int numPeopleIn;
 	//private int numPeopleOut;
@@ -24,7 +24,7 @@ public class Elevator extends AbstractElevator{
 
 	/* Signal incoming and outgoing riders */
 	public void OpenDoors(){
-		openDoors=true;
+		openDoors = true;
 		notifyAll();
 	}
 
@@ -43,13 +43,13 @@ public class Elevator extends AbstractElevator{
 				e.printStackTrace();
 			}
 		}
-		openDoors=false;
+		openDoors = false;
 	}
 
 	@Override
 	/* Go to a requested floor */
 	public synchronized void VisitFloor(int floor){
-		currentFloor=floor;
+		currentFloor = floor;
 	}
 
 
@@ -102,5 +102,8 @@ public class Elevator extends AbstractElevator{
  	}
 	
 	/* Other methods as needed goes here */
+	public int getCurrentFloor(){
+		return currentFloor;
+	}
 }
 
