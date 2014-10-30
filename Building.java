@@ -120,7 +120,7 @@ public class Building extends AbstractBuilding{
 					}
 				}
 			}
-			else if(myElevators[i].currentDirection == 2){//going down
+			else if(myElevators[i].currentDirection == 2){//going up
 				distance = numFloors - myElevators[i].getCurrentFloor(); //distance from current floor to top floor
 				distance += numFloors - fromFloor; //add distance from top floor to fromFloor
 				if(distance < min){
