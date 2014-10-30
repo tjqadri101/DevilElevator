@@ -18,6 +18,10 @@ public class TestP1 {
 				e.printStackTrace();
 			}
 			System.out.printf("F: %d, E: %d, R: %d, N: %d \n", numFloors, numElevators, numRiders, maxOccupancy);
+			if(numElevators > 1){
+				System.out.println("You are testing for part 1. The number of elevators cannot exceed 1");
+				return;
+			}
 		}
 		
 		public static void main(String args[]){
