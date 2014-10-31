@@ -1,3 +1,25 @@
+<<<<<<< HEAD
+R1 pushes U2
+E1 moves up to F2
+E1 on F2 opens
+R2 pushes U2
+R2 enters E1 on F2
+R2 pushes E1B3
+E1 on F2 closes
+E1 moves up to F3
+E1 on F3 opens
+R2 exits E1 on F3
+E1 on F3 closes
+R1 pushes U2
+E1 moves down to F2
+E1 moves down to F1
+E1 moves up to F2
+E1 on F2 opens
+R1 enters E1 on F2
+R1 pushes E1B4
+E1 on F2 closes
+E1 moves up to F3
+=======
 R2 pushes U2
 E1 moves up to F2
 E1 on F2 opens
@@ -62,11 +84,15 @@ R2 pushes U2
 R2 pushes U2
 E1 on F2 closes
 E1 moves up to F3
+>>>>>>> 5885f3d10785408adf30e5d7e1a7f7fc9c828bcc
 E1 moves up to F4
 E1 on F4 opens
 R1 exits E1 on F4
 E1 on F4 closes
+<<<<<<< HEAD
+=======
 R2 pushes U2
+>>>>>>> 5885f3d10785408adf30e5d7e1a7f7fc9c828bcc
 R1 pushes D4
 E1 on F4 opens
 R1 enters E1 on F4
