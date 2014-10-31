@@ -1,0 +1,26 @@
+R7 pushes U1
+E1 on F1 opens
+R7 enters E1 on F1
+R7 pushes E1B3
+E1 on F1 closes
+E1 moves up to F2
+R3 pushes D4
+E1 moves up to F3
+E1 on F3 opens
+R7 exits E1 on F3
+E1 on F3 closes
+E1 moves down to F2
+E1 moves down to F1
+E2 moves up to F2
+E2 moves up to F3
+E2 moves up to F4
+E2 on F4 opens
+R3 enters E2 on F4
+R3 pushes E2B2
+E2 on F4 closes
+E2 moves down to F3
+E2 moves down to F2
+E2 on F2 opens
+R3 exits E2 on F2
+E2 on F2 closes
+E2 moves down to F1
