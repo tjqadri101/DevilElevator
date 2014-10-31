@@ -39,7 +39,7 @@ public class TestP1P2 {
 				elevatorTs[i] = new Thread(elevatorSet[i]);
 			}
 			
-			Building building = new Building(numFloors, numElevators, elevatorSet, logger);
+			Building building = new Building(numFloors, numElevators, numRiders,elevatorSet, logger);
 			
 			riderSet = new Rider[numRiders];
 			riderTs = new Thread[numRiders];
