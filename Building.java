@@ -62,8 +62,8 @@ public class Building extends AbstractBuilding{
 				}
 			}
 		}
-		System.out.printf("R%d pushes U%d.\n", riderId, fromFloor);
-		myElevators[index].RequestFloorIn(fromFloor,true);
+		//System.out.printf("R%d pushes U%d.\n", riderId, fromFloor);
+		//myElevators[index].RequestFloorIn(fromFloor,true);
 		if(myElevators[index].currentDirection == 0){
 			//System.out.println("debugging");
 			if(directionForIdle){
@@ -75,7 +75,8 @@ public class Building extends AbstractBuilding{
 			//System.out.println("no of requests"+ myElevators[index].totalRequests);
 			//System.out.println("direction"+myElevators[index].currentDirection);
 		}
-		
+		System.out.printf("R%d pushes U%d.\n", riderId, fromFloor);
+		myElevators[index].RequestFloorIn(fromFloor,true);
 		return myElevators[index];
 	}
 
@@ -136,8 +137,8 @@ public class Building extends AbstractBuilding{
 				}
 			}
 		}
-		System.out.printf("R%d pushes D%d.\n", riderId, fromFloor);
-		myElevators[index].RequestFloorIn(fromFloor,false);
+		//System.out.printf("R%d pushes D%d.\n", riderId, fromFloor);
+		//myElevators[index].RequestFloorIn(fromFloor,false);
 		if(myElevators[index].currentDirection == 0){
 			//System.out.println("debugging");
 			if(directionForIdle){
@@ -149,7 +150,8 @@ public class Building extends AbstractBuilding{
 			//System.out.println("no of requests"+ myElevators[index].totalRequests);
 			//System.out.println("direction"+myElevators[index].currentDirection);
 		}
-		
+		System.out.printf("R%d pushes D%d.\n", riderId, fromFloor);
+		myElevators[index].RequestFloorIn(fromFloor,false);
 		return myElevators[index];
 	}
 
