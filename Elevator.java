@@ -174,7 +174,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 		return currentFloor;
 	}
 	public synchronized void idle(){
-		while(totalRequests==0){
+		while(totalRequests==0||currentDirection==0){
 			System.out.println("The elevator is idle");
 			try {
 				wait();
