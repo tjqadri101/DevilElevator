@@ -61,6 +61,10 @@ public class Rider implements Runnable {
 			}
 		}
 		myScanner.close();
+		synchronized(this){
+			myBuilding.numRiders--;
+			if(myBuilding.numRiders==0) myBuilding.DoneBuilding();
+		}
 		
 	}
 

@@ -3,10 +3,12 @@ public class Building extends AbstractBuilding{
 
 	private Elevator[] myElevators;
 	private MyLogger myLogger;
-	public Building(int numFloors, int numElevators, Elevator[] elevators, MyLogger logger) {
+	public int numRiders;
+	public Building(int numFloors, int numElevators,int riders, Elevator[] elevators, MyLogger logger) {
 		super(numFloors, numElevators);
 		myElevators = elevators;
 		myLogger = logger;
+		numRiders=riders;
 	}
 
 	@Override
@@ -159,6 +161,9 @@ public class Building extends AbstractBuilding{
 		String message = "R" + riderId + " pushes D" + fromFloor;
 		myLogger.log(message);
 		return myElevators[index];
+	}
+	public void DoneBuilding(){
+		for(int i=0;i<numElevators;i++) myElevators[i].Done();
 	}
 
 }
