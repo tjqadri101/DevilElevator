@@ -48,11 +48,11 @@ public class MyLogger{
 			return record.getMessage()+"\n"; 
 		}
 	}
-
+	/*
 	public static void main(String args[]){
 		
 		MyLogger logger = new MyLogger();
 		logger.log("avfc");
 		logger.log("cv");
-	}
+	}*/
 }

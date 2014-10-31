@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Rider implements Runnable {
 	private Scanner myScanner;
 	int myRiderId;
-	Building myBuilding;
+	private Building myBuilding;
 	public Rider(int riderId, File input, Building building) {
 			myRiderId = riderId;
 			myBuilding = building;
@@ -15,7 +15,6 @@ public class Rider implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 	} 
 	@Override 
 	public void run() {

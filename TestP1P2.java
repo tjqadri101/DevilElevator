@@ -31,14 +31,15 @@ public class TestP1P2 {
 			//	System.out.println("You are testing for part 1 and part 2. The number of elevators cannot exceed 1");
 			//	return;
 			//}
+			MyLogger logger = new MyLogger();
 			elevatorSet = new Elevator[numElevators];
 			elevatorTs = new Thread[numElevators];
 			for(int i = 0; i < numElevators; i++){
-				elevatorSet[i] = new Elevator(numFloors, i+1, maxOccupancy);
+				elevatorSet[i] = new Elevator(numFloors, i+1, maxOccupancy, logger);
 				elevatorTs[i] = new Thread(elevatorSet[i]);
 			}
 			
-			Building building = new Building(numFloors, numElevators, elevatorSet);
+			Building building = new Building(numFloors, numElevators, elevatorSet, logger);
 			
 			riderSet = new Rider[numRiders];
 			riderTs = new Thread[numRiders];
