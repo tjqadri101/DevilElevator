@@ -5,9 +5,9 @@ public class TestEventBarrier  {
 		public Producer(){	
 		}
 		public void run(){
-			for(int j=1;j<2;j++){
+			for(int j=1;j<2;j++){   //how many times the barrier is raised
 				
-				barrier.raise();
+				barrier.raise();  
 				
 			}	
 		}
@@ -16,10 +16,10 @@ public class TestEventBarrier  {
 		public Consumer(){
 		}
 		public void run(){
-			for(int j=1;j<2;j++){
+			for(int j=1;j<2;j++){   //how many times a thread calls arrive
 				barrier.arrive();
 				int s=0;
-				for(int i=1;i<3000000;i++){
+				for(int i=1;i<3000000;i++){   //useless work the consumer thread does
 					s=i;
 				}
 				System.out.println(s);
@@ -32,7 +32,7 @@ public class TestEventBarrier  {
 		Producer p = test.new Producer();
 		Consumer c = test.new Consumer();
 		Thread t = new Thread(p);
-		for(int i=1;i<10;i++){
+		for(int i=1;i<10;i++){        //you can change the limits of the for for more threads
 			Thread u = new Thread(c);
 			u.start();
 		}
