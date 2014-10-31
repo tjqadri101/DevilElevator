@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.*;
 
 public class TestP1P2 {
-		public static void runTest(String inputFilePath){
+		public static void runTest(String inputFilePath, boolean p1p2){
 			Elevator[] elevatorSet;
 			Rider[] riderSet;
 			Thread[] elevatorTs;
@@ -27,10 +27,10 @@ public class TestP1P2 {
 				e.printStackTrace();
 			}
 			System.out.printf("F: %d, E: %d, R: %d, N: %d \n", numFloors, numElevators, numRiders, maxOccupancy);
-			//if(numElevators > 1){
-			//	System.out.println("You are testing for part 1 and part 2. The number of elevators cannot exceed 1");
-			//	return;
-			//}
+			if(numElevators > 1 && p1p2){
+				System.out.println("You are testing for part 1 and part 2. The number of elevators cannot exceed 1");
+				return;
+			}
 			MyLogger logger = new MyLogger();
 			elevatorSet = new Elevator[numElevators];
 			elevatorTs = new Thread[numElevators];
@@ -59,6 +59,6 @@ public class TestP1P2 {
 		}
 		
 		public static void main(String args[]){
-			runTest("inP1.txt");
+			runTest("inP1.txt", false);
 		}
 }

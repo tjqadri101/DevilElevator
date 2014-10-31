@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 R1 pushes U2
 E1 moves up to F2
 E1 on F2 opens
@@ -21,80 +22,40 @@ E1 on F2 closes
 E1 moves up to F3
 =======
 R2 pushes U2
+=======
+R1 pushes U2
+>>>>>>> 662d5df17ccccc70bc971243ad488d6993b13b35
 E1 moves up to F2
 E1 on F2 opens
-R1 pushes U2
 R1 enters E1 on F2
-R1 pushes E1B4
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
-R2 pushes U2
 E1 on F2 closes
+R1 pushes E1B4
 E1 moves up to F3
 >>>>>>> 5885f3d10785408adf30e5d7e1a7f7fc9c828bcc
 E1 moves up to F4
 E1 on F4 opens
 R1 exits E1 on F4
+<<<<<<< HEAD
 E1 on F4 closes
 <<<<<<< HEAD
 =======
 R2 pushes U2
 >>>>>>> 5885f3d10785408adf30e5d7e1a7f7fc9c828bcc
+=======
+>>>>>>> 662d5df17ccccc70bc971243ad488d6993b13b35
 R1 pushes D4
+E1 on F4 closes
 E1 on F4 opens
+R2 pushes U2
+E2 moves up to F2
+E2 on F2 opens
+R2 enters E2 on F2
+R2 pushes E2B3
+E2 on F2 closes
+E2 moves up to F3
+E2 on F3 opens
+R2 exits E2 on F3
+E2 on F3 closes
 R1 enters E1 on F4
 R1 pushes E1B2
 E1 on F4 closes
@@ -103,13 +64,3 @@ E1 moves down to F2
 E1 on F2 opens
 R1 exits E1 on F2
 E1 on F2 closes
-E1 moves down to F1
-E1 moves up to F2
-E1 on F2 opens
-R2 enters E1 on F2
-R2 pushes E1B3
-E1 on F2 closes
-E1 moves up to F3
-E1 on F3 opens
-R2 exits E1 on F3
-E1 on F3 closes
