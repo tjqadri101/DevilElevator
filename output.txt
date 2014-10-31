@@ -6,6 +6,16 @@ E1 on F1 closes
 E1 moves up to F2
 E1 moves up to F3
 E1 on F3 opens
+R3 pushes D4
 R7 exits E1 on F3
 E1 on F3 closes
-R3 pushes D4
+E1 moves up to F4
+E1 on F4 opens
+R3 enters E1 on F4
+R3 pushes E1B2
+E1 on F4 closes
+E1 moves down to F3
+E1 moves down to F2
+E1 on F2 opens
+R3 exits E1 on F2
+E1 on F2 closes
