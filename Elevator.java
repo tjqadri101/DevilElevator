@@ -12,6 +12,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 	public int totalRequests;
 	private int currentFloor;
 	private MyLogger myLogger;
+	
 	/**
 	 * Other variables/data structures as needed goes here 
 	 */
@@ -189,7 +190,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 		return currentFloor;
 	}
 	public synchronized void idle(){
-		while(totalRequests==0 || currentDirection==0){
+		while(totalRequests==0||currentDirection==0){
 			System.out.println("The elevator is idle");
 			try {
 				wait();
@@ -204,8 +205,9 @@ public class Elevator extends AbstractElevator implements Runnable{
 	@Override
 	//we do a circular scan
 	public void run() {
-		while(true){
-				System.out.println("Pula e ");
+		for(int pula=1;pula<1000;pula++){
+		//while(true){
+				System.out.println("Pula e "+ pula);
 				idle();
 				//System.out.println("wtf");
 				if(currentDirection == 1){//going down
