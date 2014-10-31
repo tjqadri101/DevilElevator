@@ -1,10 +1,12 @@
 
 public class Building extends AbstractBuilding{
 
-	Elevator[] myElevators;
-	public Building(int numFloors, int numElevators, Elevator[] elevators) {
+	private Elevator[] myElevators;
+	private MyLogger myLogger;
+	public Building(int numFloors, int numElevators, Elevator[] elevators, MyLogger logger) {
 		super(numFloors, numElevators);
 		myElevators = elevators;
+		myLogger = logger;
 	}
 
 	@Override
@@ -75,8 +77,10 @@ public class Building extends AbstractBuilding{
 			//System.out.println("no of requests"+ myElevators[index].totalRequests);
 			//System.out.println("direction"+myElevators[index].currentDirection);
 		}
-		System.out.printf("R%d pushes U%d.\n", riderId, fromFloor);
 		myElevators[index].RequestFloorIn(fromFloor,true);
+		String message = "R" + riderId + " pushes U" + fromFloor;
+		//System.out.printf("R%d pushes U%d.\n", riderId, fromFloor);
+		myLogger.log(message);
 		return myElevators[index];
 	}
 
@@ -150,8 +154,10 @@ public class Building extends AbstractBuilding{
 			//System.out.println("no of requests"+ myElevators[index].totalRequests);
 			//System.out.println("direction"+myElevators[index].currentDirection);
 		}
-		System.out.printf("R%d pushes D%d.\n", riderId, fromFloor);
+		//System.out.printf("R%d pushes D%d.\n", riderId, fromFloor);
 		myElevators[index].RequestFloorIn(fromFloor,false);
+		String message = "R" + riderId + " pushes D" + fromFloor;
+		myLogger.log(message);
 		return myElevators[index];
 	}
 

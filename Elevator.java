@@ -11,15 +11,17 @@ public class Elevator extends AbstractElevator implements Runnable{
 	private int[] FloorRequestsOut = new int[numFloors+1];//no floor at index 0
 	public int totalRequests;
 	private int currentFloor;
+	private MyLogger myLogger;
 	/**
 	 * Other variables/data structures as needed goes here 
 	 */
 
-	public Elevator(int numFloors, int elevatorId, int maxOccupancyThreshold) {
+	public Elevator(int numFloors, int elevatorId, int maxOccupancyThreshold, MyLogger logger) {
 		super(numFloors, elevatorId, maxOccupancyThreshold);
 		//Initialize the elevator to start at the first floor
 		VisitFloor(1);
 		currentDirection = 0; //initialize the elevator to be initially idle
+		myLogger = logger;
 	}
 
 	@Override
@@ -30,7 +32,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 	/* Signal incoming and outgoing riders */
 	public synchronized void OpenDoors(){
 		openDoors = true;
-		System.out.println("E"+elevatorId+" on F"+currentFloor+" opens");
+		String message = "E"+elevatorId+" on F"+currentFloor+" opens";
+		myLogger.log(message);
 		notifyAll();
 	}
 
@@ -55,14 +58,23 @@ public class Elevator extends AbstractElevator implements Runnable{
 			}
 		}
 		openDoors = false;
-		System.out.println("E"+elevatorId+" on F"+currentFloor+" closes");
+		String message = "E"+elevatorId+" on F"+currentFloor+" closes";
+		myLogger.log(message);
 	}
 
 	@Override
 	/* Go to a requested floor */
 	public synchronized void VisitFloor(int floor){
-		if (currentDirection==1) System.out.println("E"+elevatorId+" moves down to F"+floor);
-		else if(currentDirection == 2) System.out.println("E"+elevatorId+" moves up to F"+floor);
+		if (currentDirection==1){
+			String message = "E"+elevatorId+" moves down to F"+floor;
+			myLogger.log(message);
+		
+		}
+		else if(currentDirection == 2){ 
+			String message = "E"+elevatorId+" moves up to F"+floor;
+			myLogger.log(message);
+		
+		}
 		else	System.out.println("E" + elevatorId + " is idle on F" +  floor + ".");
 		currentFloor = floor;
 	}
@@ -99,7 +111,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 			notifyAll();
 			return false;
 		}
-		System.out.println("R"+rider+" enters E"+elevatorId+" on F"+floor);
+		String message = "R"+rider+" enters E"+elevatorId+" on F"+floor;
+		myLogger.log(message);
 		if(direction==1){
 			FloorRequestsInDown[currentFloor]--;
 			totalRequests--;
@@ -128,7 +141,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 				e.printStackTrace();
 			}
 		}
-		System.out.println("R"+rider+" exits E"+elevatorId+" on F"+floor);
+		String message = "R"+rider+" exits E"+elevatorId+" on F"+floor;
+		myLogger.log(message);
 		FloorRequestsOut[currentFloor]--;
 		totalRequests--;
 		if(FloorRequestsOut[currentFloor]==0) notifyAll();
@@ -138,7 +152,8 @@ public class Elevator extends AbstractElevator implements Runnable{
 	@Override
 	/* Request a destination floor once you enter */
 	public synchronized void RequestFloor(int floor, int rider){
-		System.out.println("R"+rider+" pushes E"+elevatorId+"B"+floor);
+		String message = "R"+rider+" pushes E"+elevatorId+"B"+floor;
+		myLogger.log(message);
 		if(currentDirection == 0){
 			if(currentFloor < floor){
 				currentDirection = 2;
