@@ -27,7 +27,7 @@ public class TestEventBarrier  {
 			}		
 		}
 	}
-	public static void main(String args[]){
+	public static void test(){
 		TestEventBarrier test = new TestEventBarrier();
 		Producer p = test.new Producer();
 		Consumer c = test.new Consumer();

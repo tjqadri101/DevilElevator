@@ -6,27 +6,26 @@
  * Team Info & Time spent
  *************************/
 
-	Name1: Full Name 	// Edit this accordingly
-	NetId1: fn	 	// Edit
-	Time spent: 10 hours 	// Edit 
+	Name1: Talal Javed Qadri	// Edit this accordingly
+	NetId1: tq4	 	// Edit
+	Time spent: 25 hours 	// Edit 
 
-	Name2: Full Name 	// Edit this accordingly
-	NetId2: fn	 	// Edit
-	Time spent: 10 hours 	// Edit 
+	Name2: Alex Milu 	// Edit this accordingly
+	NetId2: aam47	 	// Edit
+	Time spent: 25 hours 	// Edit 
 
-	Name3: Full Name 	// Edit this accordingly
-	NetId3: fn	 	// Edit
-	Time spent: 10 hours 	// Edit 
 
+    Note: Output is logged to a file called output.txt
 /******************
- * Files to submit
+ * Files submitted
  ******************/
 
-	lab3.jar // An executable jar including all the source files and test cases.
+	We submitted an executable lab3.jar 
+    We als submitted a zipped file including all the source files and test cases.
 	README	// This file filled with the lab implementation details
 	Elevator.input // You can submit a sample input and log file
-        Elevator.log   // corresponding to the input but Elevator.log should be 
-		       // auto-generated on execution of jar file
+    Elevator logs to output.txt. The output corresponds to the input file
+    but Elevator logs to output.txt by auto-generation via execution of jar file
 
 /************************
  * Implementation details
