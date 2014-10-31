@@ -12,6 +12,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 	public int totalRequests;
 	private int currentFloor;
 	private MyLogger myLogger;
+	
 	/**
 	 * Other variables/data structures as needed goes here 
 	 */
