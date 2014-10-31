@@ -211,9 +211,7 @@ public class Elevator extends AbstractElevator implements Runnable{
 	//we do a circular scan
 	public void run() {
 		while(!done){
-				System.out.println("Pula e ");
 				idle();
-				//System.out.println("wtf");
 				if(currentDirection == 1){//going down
 					//System.out.println("error");
 					for(int i = currentFloor ; i > 0; i--){

@@ -70,8 +70,11 @@
  the threads that were waiting for an elevator. Then the elevator calls ClosedDoors which waits
  for all the riders to enter or exit the elevator. In our implementation we make the riders who
  enter wait for the riders who need to exit. After the elevator thread calls ClosedDoors it goes on
- and performs the next request. For a rider thread, after it calls Enter it calls Exit, which 
- makes it wait until the elevator is at the desired floor. After the elevator opens doors at 
+ and performs the next request. For a rider thread, after it calls Enter it calls RequestFloor. Notice
+ that if a rider does not request a floor nothing bad happens, the elevator will  just become
+ idle if it does not have ay other requests. After it has called RequestFloor, 
+it then waits to exit the elevator by calling Exit, which 
+ makes it wait() until the elevator opens doors at the desired floor. After the elevator opens doors at 
  the desired floor (by calling OpenDoors) the rider thread gets notified and exits the elevator. 
  
  For the scheduling of the elevators we used the circular SCAN algorithm. The elevator starts from a
@@ -100,15 +103,28 @@
  
  
 To test it, for EventBarrier we create a number of threads that will call arrive on the barrier. 
-Each thread can call arrive a fixed number of times. 
+Each thread can call arrive a fixed number of times. After a thread calls arrive and before
+it completes it does some useless work so it does not complete immediately. In our case
+it just goes through a for loop and prints and integer after the loop is over. In this way
+we make it seem like the consumer takes some time before crossing the bridge.  
 
 For Elevator part 1, we test it by making N greater than the number of riders (in this way
 we mimic infinite maximum occupancy) and E=1. For part 2, we test it by making N smaller than 
 the number of riders (it is best to make it 1 so you can have a lot of conflicts getting 
 in the elevator. For part three we make E>1.
 
-How to run the tests for different parts?  
 
+We have included an executable jar file to help you run the program. If no arguments are provided,
+then the jar executes TestPart3 by default. If more than 1 arguments are provided, then an error message is
+displayed on the console and the program exits. If, argument p1 is provided, then the program executes the test for
+event barrier (TestEventBarrier). For the elevator, we have one test class called TestP1P2. If, the jar is run with
+the arguments p2part1 or p2part2, then TestP1P2 runs with a constraint that the number of elevators is 1. If the number 
+of elevators exceeds 1, then the program simply displays an error message on the console and quits. To test for part 1, just
+make the capacity (specified in the input file) larger than the number of riders. To test for part3, the program needs
+an argument of p2part3. Our program expects valid input and doesn't check for invalid input errors as this was not required.
+Thus, to test for part 1 make sure the capacity is greater than the number of riders. For part 2, make sure the capacity is less
+than the number of riders, and for part 3 make sure the number of elevators is greater than 1. You need to copy the contents of your
+external input file to input.txt before running the program. The output is logged to output.txt.
 
 
 
