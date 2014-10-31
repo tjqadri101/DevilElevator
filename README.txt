@@ -15,7 +15,9 @@
 	Time spent: 25 hours 	// Edit 
 
 
-    Note: Output is logged to a file called output.txt
+    Note: Output is logged to a file called output.txt. Also note that our jar takes input
+    from input.txt so please copy the contents of your external input files to input.txt before executing the jar
+    
 /******************
  * Files submitted
  ******************/
@@ -95,6 +97,20 @@
  direction we pick the elevator that would have the to do the least number of steps before it
  gets to the rider (i.e. the elevator has to go to the top floor or bottom floor and then come 
  back).    
+ 
+ 
+To test it, for EventBarrier we create a number of threads that will call arrive on the barrier. 
+Each thread can call arrive a fixed number of times. 
+
+For Elevator part 1, we test it by making N greater than the number of riders (in this way
+we mimic infinite maximum occupancy) and E=1. For part 2, we test it by making N smaller than 
+the number of riders (it is best to make it 1 so you can have a lot of conflicts getting 
+in the elevator. For part three we make E>1.
+
+How to run the tests for different parts?  
+
+
+
 
 
 /************************
