@@ -84,9 +84,15 @@ public class Elevator extends AbstractElevator implements Runnable{
 		}
 		//System.out.println("say something");
 		if (occupancy==maxOccupancyThreshold){
-			if(direction==1) FloorRequestsInDown[currentFloor]=0;
-			if(direction==2) FloorRequestsInUp[currentFloor]=0;
-			System.out.println("R"+rider+" tries to get into E"+elevatorId+"but it is full" );
+			if(currentDirection==1) { 
+				totalRequests=totalRequests-FloorRequestsInDown[currentFloor];
+				FloorRequestsInDown[currentFloor]=0;
+			}
+			if(currentDirection==2) { 
+				totalRequests=totalRequests-FloorRequestsInUp[currentFloor];
+				FloorRequestsInUp[currentFloor]=0;
+			}
+			System.out.println("R"+rider+" tries to get into E"+elevatorId+" but it is full" );
 			notifyAll();
 			return false;
 		}
@@ -180,9 +186,9 @@ public class Elevator extends AbstractElevator implements Runnable{
 	@Override
 	//we do a circular scan
 	public void run() {
-		//for(int pula=1;pula<1000000;pula++){
-		while(true){
-			//System.out.println(totalRequests);
+		for(int pula=1;pula<1000;pula++){
+		//while(true){
+				System.out.println("Pula e "+ pula);
 				idle();
 				//System.out.println("wtf");
 				if(currentDirection == 1){//going down
