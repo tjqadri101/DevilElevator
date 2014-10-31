@@ -21,7 +21,7 @@
  ******************/
 
 	We submitted an executable lab3.jar 
-    We als submitted a zipped file including all the source files and test cases.
+    We also submitted a zipped file including all the source files and test cases.
 	README	// This file filled with the lab implementation details
 	Elevator.input // You can submit a sample input and log file
     Elevator logs to output.txt. The output corresponds to the input file
@@ -50,6 +50,17 @@
  * In case of lab is limited in some functionality, you should provide the
  * details to maximize your partial credit.  
  * */
+ 
+ In our implementation, the elevator threads and rider threads would wait on some conditions. While
+ waiting they will be notified by the calling the notifyAll() in some other part of the code.Since
+ multiple threads might be sleeping we used notifyAll() instead of notify(). We are using a circular
+ scan, that is while our direction is up and we have requests we go up until we reach the top floor.
+ There we change the direction and start to go down. Notice that the elevator becomes idle if there 
+ are no requests at one moment, it does not continue to go up or down. To handle the capacity
+ constraint we added a variable occupancy that gets increased when a person enters the elevator.
+ When occupancy reaches maxoccupancy we do not let people in anymore and the elevator can close the
+ doors. When a rider is rejected (the enter method returns false) we put the rider thread to sleep 
+ so it will not call another elevator immediately. 
 
 /************************
  * Feedback on the lab
