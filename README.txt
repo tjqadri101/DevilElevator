@@ -15,7 +15,9 @@
 	Time spent: 25 hours 	// Edit 
 
 
-    Note: Output is logged to a file called output.txt
+    Note: Output is logged to a file called output.txt. Also note that our jar takes input
+    from input.txt so please copy the contents of your external input files to input.txt before executing the jar
+    
 /******************
  * Files submitted
  ******************/
